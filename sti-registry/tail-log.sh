@@ -1,0 +1,2 @@
+journalctl -xn -f
+
