@@ -1,16 +1,29 @@
-FROM centos:7
-MAINTAINER laila.ronning@skatteetaten.no
+FROM openshift/base-centos7
 
-RUN yum update
-RUN yum install -y java-1.7.0-openjdk
-RUN yum clean all
+# Image metadata
+ENV JDK_VERSION 8u45
+ENV JDK_BUILD_VERSION b14
+ENV IMAGE_DESCRIPTION     Oracle JDK 8
+ENV IMAGE_TAGS            java,java8
+ENV IMAGE_EXPOSE_SERVICES 8080:http
 
-#ADD registry-leveransepakke-1.1.38 /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/registry-leveransepakke-1.1.38
-#RUN cd /u01/java-apps/OPPSLAGSTJENESTE-UTV-app && ln -s registry-leveransepakke-1.1.38 current
-#ADD registry.properties /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current/etc/
-#ADD registry-env.properties /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current/etc/
-#WORKDIR /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current
-#EXPOSE 20000:20000
-#CMD ./bin/start.sh
+RUN yum install -y curl && yum upgrade -y && yum update -y && \
+  curl -LO "http://download.oracle.com/otn-pub/java/jdk/$JDK_VERSION-$JDK_BUILD_VERSION/jdk-$JDK_VERSION-linux-x64.rpm" -H 'Cookie: oraclelicense=accept-securebackup-cookie' && \
+  rpm -i jdk-$JDK_VERSION-linux-x64.rpm && \
+  rm -f jdk-$JDK_VERSION-linux-x64.rpm && \
+  yum clean all -y
+
+ENV JAVA_HOME /usr/java/default
+
+#EXPOSE 8080
+
+ADD registry-leveransepakke-1.1.38 /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/registry-leveransepakke-1.1.38
+RUN cd /u01/java-apps/OPPSLAGSTJENESTE-UTV-app
+&& ln -s registry-leveransepakke-1.1.38 current
+ADD registry.properties /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current/etc/
+ADD registry-env.properties /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current/etc/
+WORKDIR /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current
+EXPOSE 20000:20000
+CMD ./bin/start.sh
 
 #ENTRYPOINT ["/registry"]
