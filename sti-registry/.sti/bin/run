@@ -1,0 +1,5 @@
+#!bin/bash -e
+# see: https://github.com/openshift/sti-basicauthurl
+# see: https://github.com/openshift/sti-nodejs
+
+source .bashrc

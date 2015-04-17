@@ -1,0 +1,26 @@
+{
+    "apiVersion": "v1beta2",
+    "desiredState": {
+        "manifest": {
+            "containers": [
+                {
+                    "image": "openshift/registry",
+                    "name": "oppslagstjenesten",
+                    "ports": [
+                        {
+                            "containerPort": 8081,
+                            "hostPort": 20000
+                        }
+                    ]
+                }
+            ],
+            "id": "oppslagstejensten",
+            "version": "v1beta1"
+        }
+    },
+    "id": "oppslagstjenesten",
+    "kind": "Pod",
+    "labels": {
+        "name": "oppslagstjenesten"
+    }
+}
