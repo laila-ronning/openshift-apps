@@ -15,15 +15,13 @@ RUN yum install -y curl && yum upgrade -y && yum update -y && \
 
 ENV JAVA_HOME /usr/java/default
 
-#EXPOSE 8080
-
 ADD registry-leveransepakke-1.1.38 /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/registry-leveransepakke-1.1.38
 RUN cd /u01/java-apps/OPPSLAGSTJENESTE-UTV-app
 && ln -s registry-leveransepakke-1.1.38 current
 ADD registry.properties /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current/etc/
 ADD registry-env.properties /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current/etc/
 WORKDIR /u01/java-apps/OPPSLAGSTJENESTE-UTV-app/current
-EXPOSE 20000:20000
+EXPOSE 20000
 CMD ./bin/start.sh
 
 #ENTRYPOINT ["/registry"]
