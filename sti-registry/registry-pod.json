@@ -4,7 +4,7 @@
         "manifest": {
             "containers": [
                 {
-                    "image": "openshift/registry",
+                    "image": "skatt/registry",
                     "name": "oppslagstjenesten",
                     "ports": [
                         {
@@ -14,7 +14,7 @@
                     ]
                 }
             ],
-            "id": "oppslagstejensten",
+            "id": "oppslagstjenesten",
             "version": "v1beta1"
         }
     },
