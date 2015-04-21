@@ -1,4 +1,5 @@
 FROM skatt/java
+ENV hostname localhost
 ENV PORT_BASE 20000 
 EXPOSE 20000 
 ENV VERSION 1.2.1

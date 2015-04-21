@@ -18,7 +18,7 @@ JAVA_MAX_MEMORY=${JAVA_MAX_MEMORY:-"512m"}
 
 SCRIPTDIR=$( cd $( dirname $0 ) && pwd )
 LOG_APP_NAME=`basename "$( cd "$SCRIPTDIR/../.." && pwd && cd "$SCRIPTDIR" )"`
-LOG_APP_NAME="$LOG_APP_NAME-"`hostname -s`
+LOG_APP_NAME="$LOG_APP_NAME-"
 
 # Detekter om tilgjengelig java er minst version 1.7.
 JAVA_HOME_7=${JAVA_HOME_7:-""}
